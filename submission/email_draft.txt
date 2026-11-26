@@ -1,0 +1,29 @@
+To: b.azimkhanov@kbtu.kz
+Subject: AI-Driven Software Engineering Practice #13, Lashbayev Nurbek, 24B031863
+
+Dear Professor Azimkhanov,
+
+Please find my submission for AI-Driven Software Engineering Practice #12 (compare code-based and low-code solutions).
+
+- Full name and ID: Lashbayev Nurbek, 24B031863
+- Class time and day: Thursday, 14:00–16:50 (UTC+5)
+- AI tool name, version, model: Grok Bot v4.7; Bolt.new (Standard; model not displayed) — Bolt.new was used for the earlier Smart Campus baseline (Practice #11), not to implement the Practice #12 low-code flow
+- Live demo (publish option, Practice #11 baseline): https://smart-campus-room-av-wgz3.bolt.host
+- Bolt project: https://bolt.new/~/sb1-lc1kdi7n
+- Public repository: https://github.com/volor-hue/smart-campus-p12
+
+I am attaching two PDFs (no ZIP, no WinRAR, no OneDrive link):
+
+1) Practice12_Report_Lashbayev_24B031863.pdf
+   Shared user story and the six acceptance criteria, the pre-defined T1–T8 contract, both implementations, the eight-case test table (code-based 8/8, low-code 8/8), measured effort, the Lecture #12 security review, the completed comparison matrix with a short recommendation, and an AI-use reflection.
+
+2) Practice12_Screenshots_Lashbayev_24B031863.pdf
+   Screenshots of the frozen baseline, the code-based UI (desktop and narrow screen) for T1–T7, the Node-RED visual flow and FlowFuse Dashboard UI, and the localhost DAST evidence (including unauthenticated GET /flows).
+
+The low-code track is a local open-source Node-RED + FlowFuse Dashboard 2.0 app (no paid subscription). Any behaviour the platform could not implement cleanly is labelled in the report.
+
+Completed by: 24B031863 Lashbayev Nurbek
+
+Kind regards,
+Lashbayev Nurbek
+24B031863
