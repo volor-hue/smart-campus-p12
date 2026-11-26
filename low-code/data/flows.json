@@ -1,0 +1,694 @@
+[
+    {
+        "id": "c0de12a5caf00001",
+        "type": "tab",
+        "label": "Smart Campus Availability",
+        "disabled": false,
+        "info": "Practice #12 low-code track — same Smart Campus availability contract as the code-based solution.\nCompleted by: 24B031863 Lashbayev Nurbek",
+        "env": []
+    },
+    {
+        "id": "c0de12a5caf00002",
+        "type": "ui-base",
+        "name": "Smart Campus UI",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 5,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "c0de12a5caf00003",
+        "type": "ui-theme",
+        "name": "Campus Theme",
+        "colors": {
+            "surface": "#fcfcfd",
+            "primary": "#2563eb",
+            "bgPage": "#f1f5f9",
+            "groupBg": "#ffffff",
+            "groupOutline": "#e2e8f0"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "12px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "c0de12a5caf00004",
+        "type": "ui-page",
+        "name": "Smart Campus Room Availability Checker",
+        "ui": "c0de12a5caf00002",
+        "path": "/checker",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "c0de12a5caf00003",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": 0,
+                "cols": 3
+            },
+            {
+                "name": "Tablet",
+                "px": 576,
+                "cols": 6
+            },
+            {
+                "name": "Small Desktop",
+                "px": 768,
+                "cols": 9
+            },
+            {
+                "name": "Desktop",
+                "px": 1024,
+                "cols": 12
+            }
+        ],
+        "tabs": [],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "c0de12a5caf00005",
+        "type": "ui-group",
+        "name": "Room 101 — Library Study Room",
+        "page": "c0de12a5caf00004",
+        "width": 12,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": true,
+        "disabled": false,
+        "groupType": "default",
+        "keepLoaded": false,
+        "tab": ""
+    },
+    {
+        "id": "c0de12a5caf00006",
+        "type": "ui-group",
+        "name": "Check Request",
+        "page": "c0de12a5caf00004",
+        "width": 12,
+        "height": 1,
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": true,
+        "disabled": false,
+        "groupType": "default",
+        "keepLoaded": false,
+        "tab": ""
+    },
+    {
+        "id": "c0de12a5caf00007",
+        "type": "ui-group",
+        "name": "Decision",
+        "page": "c0de12a5caf00004",
+        "width": 12,
+        "height": 1,
+        "order": 3,
+        "showTitle": true,
+        "className": "",
+        "visible": true,
+        "disabled": false,
+        "groupType": "default",
+        "keepLoaded": false,
+        "tab": ""
+    },
+    {
+        "id": "c0de12a5caf00010",
+        "type": "comment",
+        "z": "c0de12a5caf00001",
+        "name": "1. UI Inputs & HTTP",
+        "info": "Start time, duration, blocked flag and reference time.\nHTTP POST/GET /api/check uses the same rule engine.",
+        "x": 130,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "c0de12a5caf00011",
+        "type": "comment",
+        "z": "c0de12a5caf00001",
+        "name": "2. Collect / Normalize",
+        "info": "UI values are stored in flow context.\nHTTP body/query is normalized to the shared contract.",
+        "x": 300,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "c0de12a5caf00012",
+        "type": "comment",
+        "z": "c0de12a5caf00001",
+        "name": "3. Validation (AC1, AC2, AC6)",
+        "info": "Future start, duration 1–120, clear validation errors.",
+        "x": 500,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "c0de12a5caf00013",
+        "type": "comment",
+        "z": "c0de12a5caf00001",
+        "name": "4. Availability Engine (AC3–AC5)",
+        "info": "Blocked room, overlap (endpoints may touch), no mutation of bookings.",
+        "x": 700,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "c0de12a5caf00014",
+        "type": "comment",
+        "z": "c0de12a5caf00001",
+        "name": "5. Outputs",
+        "info": "Dashboard decision widgets (plain text, escaped) + HTTP JSON + bookings verification.",
+        "x": 880,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "c0de12a5caf00030",
+        "type": "ui-markdown",
+        "z": "c0de12a5caf00001",
+        "group": "c0de12a5caf00005",
+        "name": "Room info",
+        "order": 1,
+        "width": 8,
+        "height": 2,
+        "content": "Fixed existing booking: **10:00–11:00**  \n`[{ start: 600, end: 660 }]`\n\nFictional data only. This tool checks availability and does not create a booking.\n\nCompleted by: 24B031863 Lashbayev Nurbek",
+        "className": "",
+        "x": 120,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "c0de12a5caf00031",
+        "type": "ui-switch",
+        "z": "c0de12a5caf00001",
+        "name": "Room Blocked",
+        "label": "Room blocked",
+        "group": "c0de12a5caf00005",
+        "order": 2,
+        "width": 4,
+        "height": 1,
+        "passthru": false,
+        "decouple": false,
+        "topic": "isBlocked",
+        "topicType": "str",
+        "style": "",
+        "className": "",
+        "layout": "row-spread",
+        "clickableArea": "switch",
+        "onvalue": true,
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": false,
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 120,
+        "y": 160,
+        "wires": [
+            [
+                "c0de12a5caf00040"
+            ]
+        ]
+    },
+    {
+        "id": "c0de12a5caf00032",
+        "type": "ui-text-input",
+        "z": "c0de12a5caf00001",
+        "group": "c0de12a5caf00006",
+        "name": "Start Time",
+        "label": "Start time",
+        "order": 1,
+        "width": 4,
+        "height": 1,
+        "topic": "startTime",
+        "topicType": "str",
+        "mode": "time",
+        "tooltip": "",
+        "delay": 300,
+        "passthru": false,
+        "sendOnDelay": false,
+        "sendOnBlur": true,
+        "sendOnEnter": true,
+        "className": "",
+        "clearable": false,
+        "sendOnClear": false,
+        "icon": "",
+        "iconPosition": "left",
+        "iconInnerPosition": "inside",
+        "x": 120,
+        "y": 220,
+        "wires": [
+            [
+                "c0de12a5caf00040"
+            ]
+        ]
+    },
+    {
+        "id": "c0de12a5caf00033",
+        "type": "ui-number-input",
+        "z": "c0de12a5caf00001",
+        "group": "c0de12a5caf00006",
+        "name": "Duration",
+        "label": "Duration (min)",
+        "order": 2,
+        "width": 4,
+        "height": 1,
+        "topic": "duration",
+        "topicType": "str",
+        "min": 0,
+        "max": 1440,
+        "step": 1,
+        "tooltip": "Whole minutes. Values outside 1–120 are rejected by the rule engine.",
+        "delay": 300,
+        "passthru": false,
+        "sendOnDelay": false,
+        "sendOnBlur": true,
+        "sendOnEnter": true,
+        "className": "",
+        "clearable": false,
+        "icon": "",
+        "iconPosition": "left",
+        "iconInnerPosition": "inside",
+        "spinner": "default",
+        "x": 120,
+        "y": 280,
+        "wires": [
+            [
+                "c0de12a5caf00040"
+            ]
+        ]
+    },
+    {
+        "id": "c0de12a5caf00035",
+        "type": "ui-text-input",
+        "z": "c0de12a5caf00001",
+        "group": "c0de12a5caf00006",
+        "name": "Reference Time",
+        "label": "Reference time (default 09:00)",
+        "order": 3,
+        "width": 4,
+        "height": 1,
+        "topic": "now",
+        "topicType": "str",
+        "mode": "time",
+        "tooltip": "",
+        "delay": 300,
+        "passthru": false,
+        "sendOnDelay": false,
+        "sendOnBlur": true,
+        "sendOnEnter": true,
+        "className": "",
+        "clearable": false,
+        "sendOnClear": false,
+        "icon": "",
+        "iconPosition": "left",
+        "iconInnerPosition": "inside",
+        "x": 120,
+        "y": 340,
+        "wires": [
+            [
+                "c0de12a5caf00040"
+            ]
+        ]
+    },
+    {
+        "id": "c0de12a5caf00034",
+        "type": "ui-button",
+        "z": "c0de12a5caf00001",
+        "group": "c0de12a5caf00006",
+        "name": "Check Availability",
+        "label": "Check Availability",
+        "order": 4,
+        "width": 12,
+        "height": 1,
+        "emulateClick": false,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "refresh",
+        "iconPosition": "left",
+        "payload": "check",
+        "payloadType": "str",
+        "topic": "check",
+        "topicType": "str",
+        "buttonColor": "#2563eb",
+        "textColor": "#ffffff",
+        "iconColor": "#ffffff",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 120,
+        "y": 400,
+        "wires": [
+            [
+                "c0de12a5caf00041"
+            ]
+        ]
+    },
+    {
+        "id": "c0de12a5caf00040",
+        "type": "function",
+        "z": "c0de12a5caf00001",
+        "name": "Store Field",
+        "func": "const key = msg.topic;\nif (typeof key === 'string' && key) {\n    flow.set(key, msg.payload);\n}\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c0de12a5caf00041",
+        "type": "function",
+        "z": "c0de12a5caf00001",
+        "name": "Collect Inputs",
+        "func": "msg.payload = {\n    startTime: flow.get('startTime') || '',\n    duration: flow.get('duration'),\n    isBlocked: flow.get('isBlocked') === true,\n    now: flow.get('now') || '09:00'\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 400,
+        "wires": [
+            [
+                "c0de12a5caf00050"
+            ]
+        ]
+    },
+    {
+        "id": "c0de12a5caf00042",
+        "type": "function",
+        "z": "c0de12a5caf00001",
+        "name": "Init Defaults",
+        "func": "flow.set('startTime', '');\nflow.set('duration', '');\nflow.set('isBlocked', false);\nflow.set('now', '09:00');\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c0de12a5caf00022",
+        "type": "inject",
+        "z": "c0de12a5caf00001",
+        "name": "On start: defaults",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "init",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 460,
+        "wires": [
+            [
+                "c0de12a5caf00042"
+            ]
+        ]
+    },
+    {
+        "id": "c0de12a5caf00020",
+        "type": "http in",
+        "z": "c0de12a5caf00001",
+        "name": "POST /api/check",
+        "url": "/api/check",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 520,
+        "wires": [
+            [
+                "c0de12a5caf00050"
+            ]
+        ]
+    },
+    {
+        "id": "c0de12a5caf00021",
+        "type": "http in",
+        "z": "c0de12a5caf00001",
+        "name": "GET /api/check",
+        "url": "/api/check",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 580,
+        "wires": [
+            [
+                "c0de12a5caf00050"
+            ]
+        ]
+    },
+    {
+        "id": "c0de12a5caf00050",
+        "type": "function",
+        "z": "c0de12a5caf00001",
+        "name": "Normalize Inputs",
+        "func": "const ROOM_NAME = 'Room 101';\nconst EXISTING_BOOKINGS = [{ start: 600, end: 660 }];\n\nfunction minutesToHHMM(minutes) {\n    if (minutes === null || minutes === undefined || Number.isNaN(minutes)) return '--:--';\n    const clamped = Math.max(0, Math.min(1440, minutes));\n    const h = Math.floor(clamped / 60);\n    const m = clamped % 60;\n    return String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');\n}\n\nfunction parseClock(value, fieldName) {\n    if (typeof value === 'number') {\n        if (!Number.isFinite(value) || !Number.isInteger(value)) {\n            return { ok: false, message: fieldName + ' must be an integer number of minutes or HH:MM.' };\n        }\n        if (value < 0 || value > 1440) {\n            return { ok: false, message: fieldName + ' must be between 00:00 and 24:00 (0–1440 minutes).' };\n        }\n        return { ok: true, minutes: value };\n    }\n    const raw = String(value ?? '').trim();\n    if (raw === '') {\n        return { ok: false, message: 'Please enter a value for ' + fieldName + '.' };\n    }\n    if (raw === '24:00' || raw === '24:00:00') {\n        return { ok: true, minutes: 1440 };\n    }\n    const hm = /^([01]?\\d|2[0-3]):([0-5]\\d)(?::[0-5]\\d)?$/.exec(raw);\n    if (hm) {\n        return { ok: true, minutes: parseInt(hm[1], 10) * 60 + parseInt(hm[2], 10) };\n    }\n    if (/^-?\\d+$/.test(raw)) {\n        const minutes = parseInt(raw, 10);\n        if (minutes < 0 || minutes > 1440) {\n            return { ok: false, message: fieldName + ' must be between 00:00 and 24:00 (0–1440 minutes).' };\n        }\n        return { ok: true, minutes };\n    }\n    return { ok: false, message: fieldName + ' must be HH:MM or an integer number of minutes from midnight.' };\n}\n\nfunction parseDuration(value) {\n    let duration;\n    if (typeof value === 'number') {\n        duration = value;\n    } else if (typeof value === 'boolean') {\n        return { ok: false, reasonCode: 'invalid_duration', message: 'Duration must be a whole number of minutes.' };\n    } else {\n        const raw = String(value ?? '').trim();\n        if (raw === '') {\n            return { ok: false, reasonCode: 'invalid_duration', message: 'Please enter a duration in minutes.' };\n        }\n        if (!/^-?\\d+$/.test(raw)) {\n            return { ok: false, reasonCode: 'invalid_duration', message: 'Duration must be a whole number of minutes.' };\n        }\n        duration = parseInt(raw, 10);\n    }\n    if (!Number.isFinite(duration) || !Number.isInteger(duration)) {\n        return { ok: false, reasonCode: 'invalid_duration', message: 'Duration must be a whole number of minutes.' };\n    }\n    if (duration <= 0) {\n        return { ok: false, reasonCode: 'invalid_duration', message: 'Duration must be greater than 0 minutes.' };\n    }\n    if (duration > 120) {\n        return { ok: false, reasonCode: 'duration_too_long', message: 'Duration must be at most 120 minutes (requested ' + duration + ').' };\n    }\n    return { ok: true, duration };\n}\n\nfunction validateRequest(input) {\n    const nowParsed = parseClock(input.now, 'Reference current time');\n    if (!nowParsed.ok) {\n        return { ok: false, available: false, reasonCode: 'invalid_now', message: nowParsed.message };\n    }\n    if (nowParsed.minutes >= 1440) {\n        return { ok: false, available: false, reasonCode: 'invalid_now', message: 'Reference current time must be between 00:00 and 23:59.' };\n    }\n    const startParsed = parseClock(input.startTime, 'Start time');\n    if (!startParsed.ok) {\n        return { ok: false, available: false, reasonCode: 'invalid_start', message: startParsed.message };\n    }\n    const durationParsed = parseDuration(input.duration);\n    if (!durationParsed.ok) {\n        return { ok: false, available: false, reasonCode: durationParsed.reasonCode, message: durationParsed.message };\n    }\n    const start = startParsed.minutes;\n    const duration = durationParsed.duration;\n    const end = start + duration;\n    if (end > 1440) {\n        return {\n            ok: false,\n            available: false,\n            reasonCode: 'invalid_range',\n            message: 'Start time ' + minutesToHHMM(start) + ' plus duration ' + duration + ' minutes extends past 24:00.'\n        };\n    }\n    if (start <= nowParsed.minutes) {\n        return {\n            ok: false,\n            available: false,\n            reasonCode: 'past_start',\n            message: 'Start time ' + minutesToHHMM(start) + ' must be after the current time ' + minutesToHHMM(nowParsed.minutes) + '.'\n        };\n    }\n    return { ok: true, start, end, duration, now: nowParsed.minutes };\n}\n\nfunction checkAvailability(input) {\n    const bookings = EXISTING_BOOKINGS;\n    const before = JSON.stringify(bookings);\n    const validated = validateRequest(input);\n    let result;\n    if (!validated.ok) {\n        result = { available: false, reasonCode: validated.reasonCode, message: validated.message };\n    } else if (input.isBlocked === true || input.isBlocked === 'true' || input.isBlocked === 'on' || input.isBlocked === 1) {\n        result = { available: false, reasonCode: 'blocked', message: ROOM_NAME + ' is blocked and unavailable for any booking.' };\n    } else {\n        let overlap = null;\n        // Visual switch nodes cannot loop over a booking array; this small JS\n        // Function node is the deterministic rule engine (limitation recorded in the report).\n        for (let i = 0; i < bookings.length; i++) {\n            const booking = bookings[i];\n            if (validated.start < booking.end && booking.start < validated.end) {\n                overlap = booking;\n                break;\n            }\n        }\n        if (overlap) {\n            result = {\n                available: false,\n                reasonCode: 'overlap',\n                message: 'Requested interval ' + minutesToHHMM(validated.start) + '–' + minutesToHHMM(validated.end) +\n                    ' overlaps an existing booking ' + minutesToHHMM(overlap.start) + '–' + minutesToHHMM(overlap.end) + '.'\n            };\n        } else {\n            result = {\n                available: true,\n                reasonCode: 'available',\n                message: ROOM_NAME + ' is available from ' + minutesToHHMM(validated.start) + ' to ' + minutesToHHMM(validated.end) +\n                    ' (' + validated.duration + ' min).'\n            };\n        }\n    }\n    const after = JSON.stringify(bookings);\n    result.existingBookings = JSON.parse(JSON.stringify(EXISTING_BOOKINGS));\n    result.bookingsUnchanged = before === after && after === JSON.stringify([{ start: 600, end: 660 }]);\n    return result;\n}\n\nfunction normalizeRequest(raw) {\n    const src = (raw && typeof raw === 'object' && !Array.isArray(raw)) ? raw : {};\n    let isBlocked = src.isBlocked;\n    if (isBlocked === undefined) isBlocked = src.blocked;\n    if (typeof isBlocked === 'string') {\n        const lowered = isBlocked.toLowerCase();\n        isBlocked = (lowered === 'true' || lowered === 'on' || lowered === '1' || lowered === 'yes');\n    }\n    return {\n        startTime: src.startTime !== undefined ? src.startTime : (src.start !== undefined ? src.start : ''),\n        duration: src.duration !== undefined ? src.duration : '',\n        isBlocked: Boolean(isBlocked),\n        now: (src.now !== undefined && src.now !== '') ? src.now : ((src.referenceTime !== undefined && src.referenceTime !== '') ? src.referenceTime : '09:00')\n    };\n}\n\nlet raw = msg.payload;\nif ((!raw || typeof raw !== 'object' || Array.isArray(raw)) && msg.req && msg.req.query) {\n    raw = msg.req.query;\n}\nmsg.request = normalizeRequest(raw);\nmsg.payload = msg.request;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 520,
+        "wires": [
+            [
+                "c0de12a5caf00051"
+            ]
+        ]
+    },
+    {
+        "id": "c0de12a5caf00051",
+        "type": "function",
+        "z": "c0de12a5caf00001",
+        "name": "Validation",
+        "func": "const ROOM_NAME = 'Room 101';\nconst EXISTING_BOOKINGS = [{ start: 600, end: 660 }];\n\nfunction minutesToHHMM(minutes) {\n    if (minutes === null || minutes === undefined || Number.isNaN(minutes)) return '--:--';\n    const clamped = Math.max(0, Math.min(1440, minutes));\n    const h = Math.floor(clamped / 60);\n    const m = clamped % 60;\n    return String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');\n}\n\nfunction parseClock(value, fieldName) {\n    if (typeof value === 'number') {\n        if (!Number.isFinite(value) || !Number.isInteger(value)) {\n            return { ok: false, message: fieldName + ' must be an integer number of minutes or HH:MM.' };\n        }\n        if (value < 0 || value > 1440) {\n            return { ok: false, message: fieldName + ' must be between 00:00 and 24:00 (0–1440 minutes).' };\n        }\n        return { ok: true, minutes: value };\n    }\n    const raw = String(value ?? '').trim();\n    if (raw === '') {\n        return { ok: false, message: 'Please enter a value for ' + fieldName + '.' };\n    }\n    if (raw === '24:00' || raw === '24:00:00') {\n        return { ok: true, minutes: 1440 };\n    }\n    const hm = /^([01]?\\d|2[0-3]):([0-5]\\d)(?::[0-5]\\d)?$/.exec(raw);\n    if (hm) {\n        return { ok: true, minutes: parseInt(hm[1], 10) * 60 + parseInt(hm[2], 10) };\n    }\n    if (/^-?\\d+$/.test(raw)) {\n        const minutes = parseInt(raw, 10);\n        if (minutes < 0 || minutes > 1440) {\n            return { ok: false, message: fieldName + ' must be between 00:00 and 24:00 (0–1440 minutes).' };\n        }\n        return { ok: true, minutes };\n    }\n    return { ok: false, message: fieldName + ' must be HH:MM or an integer number of minutes from midnight.' };\n}\n\nfunction parseDuration(value) {\n    let duration;\n    if (typeof value === 'number') {\n        duration = value;\n    } else if (typeof value === 'boolean') {\n        return { ok: false, reasonCode: 'invalid_duration', message: 'Duration must be a whole number of minutes.' };\n    } else {\n        const raw = String(value ?? '').trim();\n        if (raw === '') {\n            return { ok: false, reasonCode: 'invalid_duration', message: 'Please enter a duration in minutes.' };\n        }\n        if (!/^-?\\d+$/.test(raw)) {\n            return { ok: false, reasonCode: 'invalid_duration', message: 'Duration must be a whole number of minutes.' };\n        }\n        duration = parseInt(raw, 10);\n    }\n    if (!Number.isFinite(duration) || !Number.isInteger(duration)) {\n        return { ok: false, reasonCode: 'invalid_duration', message: 'Duration must be a whole number of minutes.' };\n    }\n    if (duration <= 0) {\n        return { ok: false, reasonCode: 'invalid_duration', message: 'Duration must be greater than 0 minutes.' };\n    }\n    if (duration > 120) {\n        return { ok: false, reasonCode: 'duration_too_long', message: 'Duration must be at most 120 minutes (requested ' + duration + ').' };\n    }\n    return { ok: true, duration };\n}\n\nfunction validateRequest(input) {\n    const nowParsed = parseClock(input.now, 'Reference current time');\n    if (!nowParsed.ok) {\n        return { ok: false, available: false, reasonCode: 'invalid_now', message: nowParsed.message };\n    }\n    if (nowParsed.minutes >= 1440) {\n        return { ok: false, available: false, reasonCode: 'invalid_now', message: 'Reference current time must be between 00:00 and 23:59.' };\n    }\n    const startParsed = parseClock(input.startTime, 'Start time');\n    if (!startParsed.ok) {\n        return { ok: false, available: false, reasonCode: 'invalid_start', message: startParsed.message };\n    }\n    const durationParsed = parseDuration(input.duration);\n    if (!durationParsed.ok) {\n        return { ok: false, available: false, reasonCode: durationParsed.reasonCode, message: durationParsed.message };\n    }\n    const start = startParsed.minutes;\n    const duration = durationParsed.duration;\n    const end = start + duration;\n    if (end > 1440) {\n        return {\n            ok: false,\n            available: false,\n            reasonCode: 'invalid_range',\n            message: 'Start time ' + minutesToHHMM(start) + ' plus duration ' + duration + ' minutes extends past 24:00.'\n        };\n    }\n    if (start <= nowParsed.minutes) {\n        return {\n            ok: false,\n            available: false,\n            reasonCode: 'past_start',\n            message: 'Start time ' + minutesToHHMM(start) + ' must be after the current time ' + minutesToHHMM(nowParsed.minutes) + '.'\n        };\n    }\n    return { ok: true, start, end, duration, now: nowParsed.minutes };\n}\n\nfunction checkAvailability(input) {\n    const bookings = EXISTING_BOOKINGS;\n    const before = JSON.stringify(bookings);\n    const validated = validateRequest(input);\n    let result;\n    if (!validated.ok) {\n        result = { available: false, reasonCode: validated.reasonCode, message: validated.message };\n    } else if (input.isBlocked === true || input.isBlocked === 'true' || input.isBlocked === 'on' || input.isBlocked === 1) {\n        result = { available: false, reasonCode: 'blocked', message: ROOM_NAME + ' is blocked and unavailable for any booking.' };\n    } else {\n        let overlap = null;\n        // Visual switch nodes cannot loop over a booking array; this small JS\n        // Function node is the deterministic rule engine (limitation recorded in the report).\n        for (let i = 0; i < bookings.length; i++) {\n            const booking = bookings[i];\n            if (validated.start < booking.end && booking.start < validated.end) {\n                overlap = booking;\n                break;\n            }\n        }\n        if (overlap) {\n            result = {\n                available: false,\n                reasonCode: 'overlap',\n                message: 'Requested interval ' + minutesToHHMM(validated.start) + '–' + minutesToHHMM(validated.end) +\n                    ' overlaps an existing booking ' + minutesToHHMM(overlap.start) + '–' + minutesToHHMM(overlap.end) + '.'\n            };\n        } else {\n            result = {\n                available: true,\n                reasonCode: 'available',\n                message: ROOM_NAME + ' is available from ' + minutesToHHMM(validated.start) + ' to ' + minutesToHHMM(validated.end) +\n                    ' (' + validated.duration + ' min).'\n            };\n        }\n    }\n    const after = JSON.stringify(bookings);\n    result.existingBookings = JSON.parse(JSON.stringify(EXISTING_BOOKINGS));\n    result.bookingsUnchanged = before === after && after === JSON.stringify([{ start: 600, end: 660 }]);\n    return result;\n}\n\nfunction normalizeRequest(raw) {\n    const src = (raw && typeof raw === 'object' && !Array.isArray(raw)) ? raw : {};\n    let isBlocked = src.isBlocked;\n    if (isBlocked === undefined) isBlocked = src.blocked;\n    if (typeof isBlocked === 'string') {\n        const lowered = isBlocked.toLowerCase();\n        isBlocked = (lowered === 'true' || lowered === 'on' || lowered === '1' || lowered === 'yes');\n    }\n    return {\n        startTime: src.startTime !== undefined ? src.startTime : (src.start !== undefined ? src.start : ''),\n        duration: src.duration !== undefined ? src.duration : '',\n        isBlocked: Boolean(isBlocked),\n        now: (src.now !== undefined && src.now !== '') ? src.now : ((src.referenceTime !== undefined && src.referenceTime !== '') ? src.referenceTime : '09:00')\n    };\n}\n\nconst request = msg.request || normalizeRequest(msg.payload);\nmsg.request = request;\nconst validated = validateRequest(request);\nmsg.validation = validated;\nmsg.payload = request;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 520,
+        "wires": [
+            [
+                "c0de12a5caf00052"
+            ]
+        ]
+    },
+    {
+        "id": "c0de12a5caf00052",
+        "type": "function",
+        "z": "c0de12a5caf00001",
+        "name": "Availability Rule Engine",
+        "func": "const ROOM_NAME = 'Room 101';\nconst EXISTING_BOOKINGS = [{ start: 600, end: 660 }];\n\nfunction minutesToHHMM(minutes) {\n    if (minutes === null || minutes === undefined || Number.isNaN(minutes)) return '--:--';\n    const clamped = Math.max(0, Math.min(1440, minutes));\n    const h = Math.floor(clamped / 60);\n    const m = clamped % 60;\n    return String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');\n}\n\nfunction parseClock(value, fieldName) {\n    if (typeof value === 'number') {\n        if (!Number.isFinite(value) || !Number.isInteger(value)) {\n            return { ok: false, message: fieldName + ' must be an integer number of minutes or HH:MM.' };\n        }\n        if (value < 0 || value > 1440) {\n            return { ok: false, message: fieldName + ' must be between 00:00 and 24:00 (0–1440 minutes).' };\n        }\n        return { ok: true, minutes: value };\n    }\n    const raw = String(value ?? '').trim();\n    if (raw === '') {\n        return { ok: false, message: 'Please enter a value for ' + fieldName + '.' };\n    }\n    if (raw === '24:00' || raw === '24:00:00') {\n        return { ok: true, minutes: 1440 };\n    }\n    const hm = /^([01]?\\d|2[0-3]):([0-5]\\d)(?::[0-5]\\d)?$/.exec(raw);\n    if (hm) {\n        return { ok: true, minutes: parseInt(hm[1], 10) * 60 + parseInt(hm[2], 10) };\n    }\n    if (/^-?\\d+$/.test(raw)) {\n        const minutes = parseInt(raw, 10);\n        if (minutes < 0 || minutes > 1440) {\n            return { ok: false, message: fieldName + ' must be between 00:00 and 24:00 (0–1440 minutes).' };\n        }\n        return { ok: true, minutes };\n    }\n    return { ok: false, message: fieldName + ' must be HH:MM or an integer number of minutes from midnight.' };\n}\n\nfunction parseDuration(value) {\n    let duration;\n    if (typeof value === 'number') {\n        duration = value;\n    } else if (typeof value === 'boolean') {\n        return { ok: false, reasonCode: 'invalid_duration', message: 'Duration must be a whole number of minutes.' };\n    } else {\n        const raw = String(value ?? '').trim();\n        if (raw === '') {\n            return { ok: false, reasonCode: 'invalid_duration', message: 'Please enter a duration in minutes.' };\n        }\n        if (!/^-?\\d+$/.test(raw)) {\n            return { ok: false, reasonCode: 'invalid_duration', message: 'Duration must be a whole number of minutes.' };\n        }\n        duration = parseInt(raw, 10);\n    }\n    if (!Number.isFinite(duration) || !Number.isInteger(duration)) {\n        return { ok: false, reasonCode: 'invalid_duration', message: 'Duration must be a whole number of minutes.' };\n    }\n    if (duration <= 0) {\n        return { ok: false, reasonCode: 'invalid_duration', message: 'Duration must be greater than 0 minutes.' };\n    }\n    if (duration > 120) {\n        return { ok: false, reasonCode: 'duration_too_long', message: 'Duration must be at most 120 minutes (requested ' + duration + ').' };\n    }\n    return { ok: true, duration };\n}\n\nfunction validateRequest(input) {\n    const nowParsed = parseClock(input.now, 'Reference current time');\n    if (!nowParsed.ok) {\n        return { ok: false, available: false, reasonCode: 'invalid_now', message: nowParsed.message };\n    }\n    if (nowParsed.minutes >= 1440) {\n        return { ok: false, available: false, reasonCode: 'invalid_now', message: 'Reference current time must be between 00:00 and 23:59.' };\n    }\n    const startParsed = parseClock(input.startTime, 'Start time');\n    if (!startParsed.ok) {\n        return { ok: false, available: false, reasonCode: 'invalid_start', message: startParsed.message };\n    }\n    const durationParsed = parseDuration(input.duration);\n    if (!durationParsed.ok) {\n        return { ok: false, available: false, reasonCode: durationParsed.reasonCode, message: durationParsed.message };\n    }\n    const start = startParsed.minutes;\n    const duration = durationParsed.duration;\n    const end = start + duration;\n    if (end > 1440) {\n        return {\n            ok: false,\n            available: false,\n            reasonCode: 'invalid_range',\n            message: 'Start time ' + minutesToHHMM(start) + ' plus duration ' + duration + ' minutes extends past 24:00.'\n        };\n    }\n    if (start <= nowParsed.minutes) {\n        return {\n            ok: false,\n            available: false,\n            reasonCode: 'past_start',\n            message: 'Start time ' + minutesToHHMM(start) + ' must be after the current time ' + minutesToHHMM(nowParsed.minutes) + '.'\n        };\n    }\n    return { ok: true, start, end, duration, now: nowParsed.minutes };\n}\n\nfunction checkAvailability(input) {\n    const bookings = EXISTING_BOOKINGS;\n    const before = JSON.stringify(bookings);\n    const validated = validateRequest(input);\n    let result;\n    if (!validated.ok) {\n        result = { available: false, reasonCode: validated.reasonCode, message: validated.message };\n    } else if (input.isBlocked === true || input.isBlocked === 'true' || input.isBlocked === 'on' || input.isBlocked === 1) {\n        result = { available: false, reasonCode: 'blocked', message: ROOM_NAME + ' is blocked and unavailable for any booking.' };\n    } else {\n        let overlap = null;\n        // Visual switch nodes cannot loop over a booking array; this small JS\n        // Function node is the deterministic rule engine (limitation recorded in the report).\n        for (let i = 0; i < bookings.length; i++) {\n            const booking = bookings[i];\n            if (validated.start < booking.end && booking.start < validated.end) {\n                overlap = booking;\n                break;\n            }\n        }\n        if (overlap) {\n            result = {\n                available: false,\n                reasonCode: 'overlap',\n                message: 'Requested interval ' + minutesToHHMM(validated.start) + '–' + minutesToHHMM(validated.end) +\n                    ' overlaps an existing booking ' + minutesToHHMM(overlap.start) + '–' + minutesToHHMM(overlap.end) + '.'\n            };\n        } else {\n            result = {\n                available: true,\n                reasonCode: 'available',\n                message: ROOM_NAME + ' is available from ' + minutesToHHMM(validated.start) + ' to ' + minutesToHHMM(validated.end) +\n                    ' (' + validated.duration + ' min).'\n            };\n        }\n    }\n    const after = JSON.stringify(bookings);\n    result.existingBookings = JSON.parse(JSON.stringify(EXISTING_BOOKINGS));\n    result.bookingsUnchanged = before === after && after === JSON.stringify([{ start: 600, end: 660 }]);\n    return result;\n}\n\nfunction normalizeRequest(raw) {\n    const src = (raw && typeof raw === 'object' && !Array.isArray(raw)) ? raw : {};\n    let isBlocked = src.isBlocked;\n    if (isBlocked === undefined) isBlocked = src.blocked;\n    if (typeof isBlocked === 'string') {\n        const lowered = isBlocked.toLowerCase();\n        isBlocked = (lowered === 'true' || lowered === 'on' || lowered === '1' || lowered === 'yes');\n    }\n    return {\n        startTime: src.startTime !== undefined ? src.startTime : (src.start !== undefined ? src.start : ''),\n        duration: src.duration !== undefined ? src.duration : '',\n        isBlocked: Boolean(isBlocked),\n        now: (src.now !== undefined && src.now !== '') ? src.now : ((src.referenceTime !== undefined && src.referenceTime !== '') ? src.referenceTime : '09:00')\n    };\n}\n\nconst request = msg.request || normalizeRequest(msg.payload);\nconst result = checkAvailability(request);\nmsg.result = result;\nmsg.payload = result;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 520,
+        "wires": [
+            [
+                "c0de12a5caf00053"
+            ]
+        ]
+    },
+    {
+        "id": "c0de12a5caf00053",
+        "type": "function",
+        "z": "c0de12a5caf00001",
+        "name": "Split To Outputs",
+        "func": "const result = msg.result || msg.payload;\nlet statusLabel = 'Validation Error';\nif (result.available) statusLabel = 'Available';\nelse if (result.reasonCode === 'overlap' || result.reasonCode === 'blocked') statusLabel = 'Unavailable';\n\nconst httpMsg = {\n    req: msg.req,\n    res: msg.res,\n    payload: {\n        available: result.available,\n        reasonCode: result.reasonCode,\n        message: result.message,\n        existingBookings: result.existingBookings,\n        bookingsUnchanged: result.bookingsUnchanged\n    },\n    headers: { 'Content-Type': 'application/json; charset=utf-8' }\n};\n\nreturn [\n    { payload: statusLabel, topic: 'status' },\n    { payload: 'reason code: ' + result.reasonCode, topic: 'reason' },\n    { payload: result.message, topic: 'message' },\n    httpMsg,\n    { payload: result.bookingsUnchanged ? 'existingBookings unchanged: [{ start: 600, end: 660 }]' : 'ERROR: bookings were mutated', topic: 'bookings' }\n];",
+        "outputs": 5,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 930,
+        "y": 520,
+        "wires": [
+            [
+                "c0de12a5caf00061"
+            ],
+            [
+                "c0de12a5caf00062"
+            ],
+            [
+                "c0de12a5caf00063"
+            ],
+            [
+                "c0de12a5caf00060"
+            ],
+            [
+                "c0de12a5caf00064"
+            ]
+        ]
+    },
+    {
+        "id": "c0de12a5caf00060",
+        "type": "http response",
+        "z": "c0de12a5caf00001",
+        "name": "HTTP Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 930,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "c0de12a5caf00061",
+        "type": "ui-text",
+        "z": "c0de12a5caf00001",
+        "group": "c0de12a5caf00007",
+        "name": "Status",
+        "order": 1,
+        "width": 6,
+        "height": 1,
+        "label": "Status",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "style": false,
+        "font": "Helvetica",
+        "fontSize": 16,
+        "color": "#334155",
+        "wrapText": true,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 930,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "c0de12a5caf00062",
+        "type": "ui-text",
+        "z": "c0de12a5caf00001",
+        "group": "c0de12a5caf00007",
+        "name": "Reason code",
+        "order": 2,
+        "width": 6,
+        "height": 1,
+        "label": "Reason",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "style": false,
+        "font": "Helvetica",
+        "fontSize": 16,
+        "color": "#334155",
+        "wrapText": true,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 930,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "c0de12a5caf00063",
+        "type": "ui-text",
+        "z": "c0de12a5caf00001",
+        "group": "c0de12a5caf00007",
+        "name": "Message",
+        "order": 3,
+        "width": 12,
+        "height": 2,
+        "label": "Message",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "style": false,
+        "font": "Helvetica",
+        "fontSize": 16,
+        "color": "#334155",
+        "wrapText": true,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 930,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "c0de12a5caf00064",
+        "type": "debug",
+        "z": "c0de12a5caf00001",
+        "name": "Bookings State Verification",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 930,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "c0de12a5caf00015",
+        "type": "comment",
+        "z": "c0de12a5caf00001",
+        "name": "Same rule node for UI + HTTP",
+        "info": "Both the dashboard button and /api/check travel through Normalize → Validation → Availability Rule Engine.",
+        "x": 720,
+        "y": 460,
+        "wires": []
+    }
+]
