@@ -1,0 +1,14 @@
+node_modules/
+dist/
+build/
+.vite/
+.cache/
+.vitest-cache/
+.tmp/
+*.log
+.DS_Store
+low-code/data/node_modules/
+low-code/data/.config.*
+low-code/data/.flows.json.backup
+low-code/data/lib/
+screens/_*.png
