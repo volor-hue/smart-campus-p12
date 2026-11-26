@@ -1,0 +1,75 @@
+{
+  "timezone": "Asia/Almaty (UTC+5)",
+  "notes": "Wall-clock windows taken from shell logs (date -Iseconds) and command output. Values are not invented. Code-based started from the frozen Practice #11 baseline (node_modules already present). Low-code was installed and built from scratch.",
+  "code_based": {
+    "setup": {
+      "start": "2026-11-26T14:36:06+05:00",
+      "end": "2026-11-26T14:36:07+05:00",
+      "seconds": 1,
+      "what": "Copied /workspace/p12/code-baseline to /workspace/p12/code-based (including node_modules)."
+    },
+    "implementation": {
+      "start": "2026-11-26T14:36:45+05:00",
+      "end": "2026-11-26T14:37:43+05:00",
+      "seconds": 58,
+      "what": "Wrote validation.ts, availability.ts, contract.test.ts, App.tsx (start + duration + reference time + blocked toggle) and App.test.tsx."
+    },
+    "debugging": {
+      "start": "2026-11-26T14:37:50+05:00",
+      "end": "2026-11-26T14:39:21+05:00",
+      "seconds": 91,
+      "what": "Fixed one ESLint react-hooks warning; compacted the layout after the first 1280\u00d7800 screenshot clipped the result card; re-ran test/lint/build (60/60 still passing)."
+    },
+    "testing": {
+      "start": "2026-11-26T14:37:43+05:00",
+      "end": "2026-11-26T14:40:00+05:00",
+      "seconds": 137,
+      "what": "npm test (60 passed, including T1\u2013T8), npm run lint (clean), npm run typecheck, npm run build; Playwright screenshots 02\u201307 of T1\u2013T7."
+    },
+    "category_seconds": {
+      "setup": 1,
+      "implementation": 58,
+      "debugging": 91,
+      "testing": 137
+    },
+    "build_and_repair_minutes": 2.5
+  },
+  "low_code": {
+    "setup": {
+      "start": "2026-11-26T14:38:15+05:00",
+      "end": "2026-11-26T14:38:23+05:00",
+      "seconds": 8,
+      "extra_install": {
+        "start": "2026-11-26T14:41:47+05:00",
+        "seconds_approx": 3,
+        "what": "Installed @flowfuse/node-red-dashboard into the Node-RED userDir."
+      },
+      "what": "npm install node-red@5.0.10 and @flowfuse/node-red-dashboard@1.37.0 in /workspace/p12/low-code (368 packages, 8s)."
+    },
+    "implementation": {
+      "start": "2026-11-26T14:41:47+05:00",
+      "end": "2026-11-26T14:43:16+05:00",
+      "seconds": 89,
+      "what": "Wrote settings.js and flows.json, started Node-RED on 127.0.0.1:1880, first successful POST /api/check, then T1\u2013T8 all passed over HTTP."
+    },
+    "debugging": {
+      "start": "2026-11-26T14:43:16+05:00",
+      "end": "2026-11-26T14:53:30+05:00",
+      "seconds": 614,
+      "what": "Dashboard and editor screenshot work: notification modal, zoom-fit, hide right sidebar, compact canvas coordinates, Decision widget layout, mobile scroll so the message is visible. One deploy via POST /flows."
+    },
+    "testing": {
+      "start": "2026-11-26T14:43:16+05:00",
+      "end": "2026-11-26T14:54:40+05:00",
+      "seconds": 684,
+      "what": "HTTP T1\u2013T8 (all pass, identical messages); Dashboard confirmation of T1, T2, T3, T5; DAST on /api/check, Dashboard, and unauthenticated GET /flows."
+    },
+    "category_seconds": {
+      "setup": 8,
+      "implementation": 89,
+      "debugging": 614,
+      "testing": 684
+    },
+    "build_and_repair_minutes": 11.9
+  }
+}

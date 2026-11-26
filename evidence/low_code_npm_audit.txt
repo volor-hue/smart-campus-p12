@@ -1,0 +1,171 @@
+# npm audit report
+
+glob  9.0.0 - 14.0.1
+Severity: moderate
+Glob: AbortSignal cancellation bypass allows post-timeout filesystem traversal - https://github.com/advisories/GHSA-3g3m-2fjr-6pw4
+Depends on vulnerable versions of minimatch
+fix available via `npm audit fix --force`
+Will install node-red@4.1.8, which is a breaking change
+node_modules/npm/node_modules/glob
+  @npmcli/map-workspaces  3.0.3 - 6.0.0
+  Depends on vulnerable versions of @npmcli/package-json
+  Depends on vulnerable versions of glob
+  Depends on vulnerable versions of minimatch
+  node_modules/npm/node_modules/@npmcli/map-workspaces
+    @npmcli/arborist  >=6.2.6
+    Depends on vulnerable versions of @npmcli/map-workspaces
+    Depends on vulnerable versions of @npmcli/metavuln-calculator
+    Depends on vulnerable versions of @npmcli/package-json
+    Depends on vulnerable versions of @npmcli/run-script
+    Depends on vulnerable versions of cacache
+    Depends on vulnerable versions of minimatch
+    Depends on vulnerable versions of npm-registry-fetch
+    Depends on vulnerable versions of pacote
+    node_modules/npm/node_modules/@npmcli/arborist
+      libnpmdiff  >=5.0.14
+      Depends on vulnerable versions of @npmcli/arborist
+      Depends on vulnerable versions of minimatch
+      Depends on vulnerable versions of pacote
+      node_modules/npm/node_modules/libnpmdiff
+        npm  6.6.0-next.0 - 6.10.1 || 7.21.0 - 8.5.4 || 8.19.0 - 8.19.2 || >=9.0.0-pre.0
+        Depends on vulnerable versions of @npmcli/arborist
+        Depends on vulnerable versions of @npmcli/config
+        Depends on vulnerable versions of @npmcli/map-workspaces
+        Depends on vulnerable versions of @npmcli/metavuln-calculator
+        Depends on vulnerable versions of @npmcli/package-json
+        Depends on vulnerable versions of @npmcli/run-script
+        Depends on vulnerable versions of @sigstore/tuf
+        Depends on vulnerable versions of cacache
+        Depends on vulnerable versions of glob
+        Depends on vulnerable versions of init-package-json
+        Depends on vulnerable versions of libnpmaccess
+        Depends on vulnerable versions of libnpmdiff
+        Depends on vulnerable versions of libnpmexec
+        Depends on vulnerable versions of libnpmfund
+        Depends on vulnerable versions of libnpmorg
+        Depends on vulnerable versions of libnpmpack
+        Depends on vulnerable versions of libnpmpublish
+        Depends on vulnerable versions of libnpmsearch
+        Depends on vulnerable versions of libnpmteam
+        Depends on vulnerable versions of libnpmversion
+        Depends on vulnerable versions of make-fetch-happen
+        Depends on vulnerable versions of minimatch
+        Depends on vulnerable versions of npm-profile
+        Depends on vulnerable versions of npm-registry-fetch
+        Depends on vulnerable versions of pacote
+        node_modules/npm
+          @node-red/registry  >=4.1.9
+          Depends on vulnerable versions of npm
+          node_modules/@node-red/registry
+            @node-red/runtime  >=4.1.9
+            Depends on vulnerable versions of @node-red/registry
+            node_modules/@node-red/runtime
+              node-red  >=4.1.9
+              Depends on vulnerable versions of @node-red/runtime
+              node_modules/node-red
+      libnpmexec  >=5.0.14
+      Depends on vulnerable versions of @npmcli/arborist
+      Depends on vulnerable versions of @npmcli/package-json
+      Depends on vulnerable versions of @npmcli/run-script
+      Depends on vulnerable versions of pacote
+      node_modules/npm/node_modules/libnpmexec
+      libnpmfund  >=4.0.14
+      Depends on vulnerable versions of @npmcli/arborist
+      node_modules/npm/node_modules/libnpmfund
+      libnpmpack  >=5.0.14
+      Depends on vulnerable versions of @npmcli/arborist
+      Depends on vulnerable versions of @npmcli/run-script
+      Depends on vulnerable versions of pacote
+      node_modules/npm/node_modules/libnpmpack
+    @npmcli/config  8.3.4 - 11.0.0-pre.3
+    Depends on vulnerable versions of @npmcli/map-workspaces
+    Depends on vulnerable versions of @npmcli/package-json
+    node_modules/npm/node_modules/@npmcli/config
+  @npmcli/package-json  3.1.0 - 8.0.0
+  Depends on vulnerable versions of glob
+  node_modules/npm/node_modules/@npmcli/package-json
+    @npmcli/run-script  7.0.4 - 10.0.4
+    Depends on vulnerable versions of @npmcli/package-json
+    node_modules/npm/node_modules/@npmcli/run-script
+      libnpmversion  6.0.0 - 9.0.0-pre.1
+      Depends on vulnerable versions of @npmcli/run-script
+      node_modules/npm/node_modules/libnpmversion
+      pacote  17.0.0 - 21.5.3
+      Depends on vulnerable versions of @npmcli/package-json
+      Depends on vulnerable versions of @npmcli/run-script
+      Depends on vulnerable versions of cacache
+      Depends on vulnerable versions of npm-packlist
+      Depends on vulnerable versions of npm-registry-fetch
+      Depends on vulnerable versions of sigstore
+      node_modules/npm/node_modules/pacote
+        @npmcli/metavuln-calculator  7.0.0 - 9.0.3
+        Depends on vulnerable versions of cacache
+        Depends on vulnerable versions of pacote
+        node_modules/npm/node_modules/@npmcli/metavuln-calculator
+    init-package-json  6.0.1 - 8.2.5
+    Depends on vulnerable versions of @npmcli/package-json
+    node_modules/npm/node_modules/init-package-json
+    libnpmpublish  9.0.0-pre.0 - 11.2.1
+    Depends on vulnerable versions of @npmcli/package-json
+    Depends on vulnerable versions of npm-registry-fetch
+    Depends on vulnerable versions of sigstore
+    node_modules/npm/node_modules/libnpmpublish
+  cacache  17.0.5 - 21.0.1
+  Depends on vulnerable versions of glob
+  node_modules/npm/node_modules/cacache
+    make-fetch-happen  13.0.0 - 15.0.6
+    Depends on vulnerable versions of cacache
+    node_modules/npm/node_modules/make-fetch-happen
+      @sigstore/sign  2.0.0 - 4.1.1
+      Depends on vulnerable versions of make-fetch-happen
+      node_modules/npm/node_modules/@sigstore/sign
+        sigstore  1.6.0 - 4.1.1
+        Depends on vulnerable versions of @sigstore/sign
+        Depends on vulnerable versions of @sigstore/tuf
+        node_modules/npm/node_modules/sigstore
+      npm-registry-fetch  16.0.0 - 19.1.1
+      Depends on vulnerable versions of make-fetch-happen
+      node_modules/npm/node_modules/npm-registry-fetch
+        libnpmaccess  8.0.0-pre.0 - 10.0.3
+        Depends on vulnerable versions of npm-registry-fetch
+        node_modules/npm/node_modules/libnpmaccess
+        libnpmorg  6.0.0-pre.0 - 8.0.1
+        Depends on vulnerable versions of npm-registry-fetch
+        node_modules/npm/node_modules/libnpmorg
+        libnpmsearch  7.0.0-pre.0 - 9.0.1
+        Depends on vulnerable versions of npm-registry-fetch
+        node_modules/npm/node_modules/libnpmsearch
+        libnpmteam  6.0.0-pre.0 - 8.0.2
+        Depends on vulnerable versions of npm-registry-fetch
+        node_modules/npm/node_modules/libnpmteam
+        npm-profile  9.0.0 - 12.0.2
+        Depends on vulnerable versions of npm-registry-fetch
+        node_modules/npm/node_modules/npm-profile
+      tuf-js  1.1.2 - 6.0.2
+      Depends on vulnerable versions of @tufjs/models
+      Depends on vulnerable versions of make-fetch-happen
+      node_modules/npm/node_modules/tuf-js
+        @sigstore/tuf  <=4.0.2
+        Depends on vulnerable versions of tuf-js
+        node_modules/npm/node_modules/@sigstore/tuf
+
+minimatch  7.0.0 - 11.0.0
+Severity: moderate
+minimatch has potential denial of service via globparts amplification - https://github.com/advisories/GHSA-g3hv-75wg-m249
+fix available via `npm audit fix --force`
+Will install node-red@4.1.8, which is a breaking change
+node_modules/npm/node_modules/minimatch
+  @tufjs/models  1.0.1 - 5.0.2
+  Depends on vulnerable versions of minimatch
+  node_modules/npm/node_modules/@tufjs/models
+  ignore-walk  6.0.2 - 9.0.0
+  Depends on vulnerable versions of minimatch
+  node_modules/npm/node_modules/ignore-walk
+    npm-packlist  8.0.1 - 10.0.4
+    Depends on vulnerable versions of ignore-walk
+    node_modules/npm/node_modules/npm-packlist
+
+35 moderate severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force

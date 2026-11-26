@@ -1,0 +1,187 @@
+[
+  {
+    "case": "DAST-XSS-startTime",
+    "request": {
+      "startTime": "<script>alert(1)</script>",
+      "duration": 60,
+      "isBlocked": false,
+      "now": "09:00"
+    },
+    "http_status": 200,
+    "response": {
+      "available": false,
+      "reasonCode": "invalid_start",
+      "message": "Start time must be HH:MM or an integer number of minutes from midnight.",
+      "existingBookings": [
+        {
+          "start": 600,
+          "end": 660
+        }
+      ],
+      "bookingsUnchanged": true
+    },
+    "raw": "{\"available\":false,\"reasonCode\":\"invalid_start\",\"message\":\"Start time must be HH:MM or an integer number of minutes from midnight.\",\"existingBookings\":[{\"start\":600,\"end\":660}],\"bookingsUnchanged\":true}"
+  },
+  {
+    "case": "DAST-XSS-duration",
+    "request": {
+      "startTime": "11:30",
+      "duration": "<script>alert(1)</script>",
+      "isBlocked": false,
+      "now": "09:00"
+    },
+    "http_status": 200,
+    "response": {
+      "available": false,
+      "reasonCode": "invalid_duration",
+      "message": "Duration must be a whole number of minutes.",
+      "existingBookings": [
+        {
+          "start": 600,
+          "end": 660
+        }
+      ],
+      "bookingsUnchanged": true
+    },
+    "raw": "{\"available\":false,\"reasonCode\":\"invalid_duration\",\"message\":\"Duration must be a whole number of minutes.\",\"existingBookings\":[{\"start\":600,\"end\":660}],\"bookingsUnchanged\":true}"
+  },
+  {
+    "case": "DAST-SQLi-like-start",
+    "request": {
+      "startTime": "' OR 1=1 --",
+      "duration": 60,
+      "isBlocked": false,
+      "now": "09:00"
+    },
+    "http_status": 200,
+    "response": {
+      "available": false,
+      "reasonCode": "invalid_start",
+      "message": "Start time must be HH:MM or an integer number of minutes from midnight.",
+      "existingBookings": [
+        {
+          "start": 600,
+          "end": 660
+        }
+      ],
+      "bookingsUnchanged": true
+    },
+    "raw": "{\"available\":false,\"reasonCode\":\"invalid_start\",\"message\":\"Start time must be HH:MM or an integer number of minutes from midnight.\",\"existingBookings\":[{\"start\":600,\"end\":660}],\"bookingsUnchanged\":true}"
+  },
+  {
+    "case": "DAST-99:99",
+    "request": {
+      "startTime": "99:99",
+      "duration": 60,
+      "isBlocked": false,
+      "now": "09:00"
+    },
+    "http_status": 200,
+    "response": {
+      "available": false,
+      "reasonCode": "invalid_start",
+      "message": "Start time must be HH:MM or an integer number of minutes from midnight.",
+      "existingBookings": [
+        {
+          "start": 600,
+          "end": 660
+        }
+      ],
+      "bookingsUnchanged": true
+    },
+    "raw": "{\"available\":false,\"reasonCode\":\"invalid_start\",\"message\":\"Start time must be HH:MM or an integer number of minutes from midnight.\",\"existingBookings\":[{\"start\":600,\"end\":660}],\"bookingsUnchanged\":true}"
+  },
+  {
+    "case": "DAST-duration-neg10",
+    "request": {
+      "startTime": "11:30",
+      "duration": -10,
+      "isBlocked": false,
+      "now": "09:00"
+    },
+    "http_status": 200,
+    "response": {
+      "available": false,
+      "reasonCode": "invalid_duration",
+      "message": "Duration must be greater than 0 minutes.",
+      "existingBookings": [
+        {
+          "start": 600,
+          "end": 660
+        }
+      ],
+      "bookingsUnchanged": true
+    },
+    "raw": "{\"available\":false,\"reasonCode\":\"invalid_duration\",\"message\":\"Duration must be greater than 0 minutes.\",\"existingBookings\":[{\"start\":600,\"end\":660}],\"bookingsUnchanged\":true}"
+  },
+  {
+    "case": "DAST-duration-0",
+    "request": {
+      "startTime": "11:30",
+      "duration": 0,
+      "isBlocked": false,
+      "now": "09:00"
+    },
+    "http_status": 200,
+    "response": {
+      "available": false,
+      "reasonCode": "invalid_duration",
+      "message": "Duration must be greater than 0 minutes.",
+      "existingBookings": [
+        {
+          "start": 600,
+          "end": 660
+        }
+      ],
+      "bookingsUnchanged": true
+    },
+    "raw": "{\"available\":false,\"reasonCode\":\"invalid_duration\",\"message\":\"Duration must be greater than 0 minutes.\",\"existingBookings\":[{\"start\":600,\"end\":660}],\"bookingsUnchanged\":true}"
+  },
+  {
+    "case": "DAST-duration-121",
+    "request": {
+      "startTime": "11:30",
+      "duration": 121,
+      "isBlocked": false,
+      "now": "09:00"
+    },
+    "http_status": 200,
+    "response": {
+      "available": false,
+      "reasonCode": "duration_too_long",
+      "message": "Duration must be at most 120 minutes (requested 121).",
+      "existingBookings": [
+        {
+          "start": 600,
+          "end": 660
+        }
+      ],
+      "bookingsUnchanged": true
+    },
+    "raw": "{\"available\":false,\"reasonCode\":\"duration_too_long\",\"message\":\"Duration must be at most 120 minutes (requested 121).\",\"existingBookings\":[{\"start\":600,\"end\":660}],\"bookingsUnchanged\":true}"
+  },
+  {
+    "case": "DAST-unauth http://127.0.0.1:1880/flows",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "bytes": 35050,
+    "www_authenticate": null,
+    "preview": "[{\"id\":\"c0de12a5caf00001\",\"type\":\"tab\",\"label\":\"Smart Campus Availability\",\"disabled\":false,\"info\":\"Practice #12 low-code track — same Smart Campus availability contract as the code-based solution.\\"
+  },
+  {
+    "case": "DAST-unauth http://127.0.0.1:1880/",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 1731,
+    "www_authenticate": null,
+    "preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<meta name=\"ap"
+  },
+  {
+    "case": "DAST-unauth http://127.0.0.1:1880/dashboard/checker",
+    "http_status": 200,
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 1596,
+    "www_authenticate": null,
+    "preview": "<!doctype html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\">\n    <title>FlowFuse Dashboard</title>\n    <meta name=\"d"
+  }
+]

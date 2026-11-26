@@ -1,0 +1,229 @@
+{
+  "completed_by": "24B031863 Lashbayev Nurbek",
+  "date": "2026-11-26",
+  "timezone": "Asia/Almaty (UTC+5)",
+  "now": "09:00",
+  "existingBookings": [
+    {
+      "start": 600,
+      "end": 660
+    }
+  ],
+  "summary": {
+    "code_based": "8/8",
+    "low_code": "8/8"
+  },
+  "cases": [
+    {
+      "id": "T1",
+      "expected": {
+        "available": true,
+        "reasonCode": "available",
+        "message": "Room 101 is available from 11:30 to 12:30 (60 min)."
+      },
+      "code_based": {
+        "observed": {
+          "available": true,
+          "reasonCode": "available",
+          "message": "Room 101 is available from 11:30 to 12:30 (60 min)."
+        },
+        "pass": true,
+        "method": "vitest src/utils/contract.test.ts (and UI tests in App.test.tsx for T1–T7)"
+      },
+      "low_code": {
+        "observed": {
+          "available": true,
+          "reasonCode": "available",
+          "message": "Room 101 is available from 11:30 to 12:30 (60 min)."
+        },
+        "pass": true,
+        "method": "HTTP POST /api/check (same rule engine as the Dashboard button); T1/T2/T3/T5 also confirmed on the Dashboard UI"
+      }
+    },
+    {
+      "id": "T2",
+      "expected": {
+        "available": false,
+        "reasonCode": "overlap",
+        "message": "Requested interval 10:30–11:30 overlaps an existing booking 10:00–11:00."
+      },
+      "code_based": {
+        "observed": {
+          "available": false,
+          "reasonCode": "overlap",
+          "message": "Requested interval 10:30–11:30 overlaps an existing booking 10:00–11:00."
+        },
+        "pass": true,
+        "method": "vitest src/utils/contract.test.ts (and UI tests in App.test.tsx for T1–T7)"
+      },
+      "low_code": {
+        "observed": {
+          "available": false,
+          "reasonCode": "overlap",
+          "message": "Requested interval 10:30–11:30 overlaps an existing booking 10:00–11:00."
+        },
+        "pass": true,
+        "method": "HTTP POST /api/check (same rule engine as the Dashboard button); T1/T2/T3/T5 also confirmed on the Dashboard UI"
+      }
+    },
+    {
+      "id": "T3",
+      "expected": {
+        "available": false,
+        "reasonCode": "blocked",
+        "message": "Room 101 is blocked and unavailable for any booking."
+      },
+      "code_based": {
+        "observed": {
+          "available": false,
+          "reasonCode": "blocked",
+          "message": "Room 101 is blocked and unavailable for any booking."
+        },
+        "pass": true,
+        "method": "vitest src/utils/contract.test.ts (and UI tests in App.test.tsx for T1–T7)"
+      },
+      "low_code": {
+        "observed": {
+          "available": false,
+          "reasonCode": "blocked",
+          "message": "Room 101 is blocked and unavailable for any booking."
+        },
+        "pass": true,
+        "method": "HTTP POST /api/check (same rule engine as the Dashboard button); T1/T2/T3/T5 also confirmed on the Dashboard UI"
+      }
+    },
+    {
+      "id": "T4",
+      "expected": {
+        "available": false,
+        "reasonCode": "invalid_duration",
+        "message": "Duration must be greater than 0 minutes."
+      },
+      "code_based": {
+        "observed": {
+          "available": false,
+          "reasonCode": "invalid_duration",
+          "message": "Duration must be greater than 0 minutes."
+        },
+        "pass": true,
+        "method": "vitest src/utils/contract.test.ts (and UI tests in App.test.tsx for T1–T7)"
+      },
+      "low_code": {
+        "observed": {
+          "available": false,
+          "reasonCode": "invalid_duration",
+          "message": "Duration must be greater than 0 minutes."
+        },
+        "pass": true,
+        "method": "HTTP POST /api/check (same rule engine as the Dashboard button); T1/T2/T3/T5 also confirmed on the Dashboard UI"
+      }
+    },
+    {
+      "id": "T5",
+      "expected": {
+        "available": false,
+        "reasonCode": "duration_too_long",
+        "message": "Duration must be at most 120 minutes (requested 121)."
+      },
+      "code_based": {
+        "observed": {
+          "available": false,
+          "reasonCode": "duration_too_long",
+          "message": "Duration must be at most 120 minutes (requested 121)."
+        },
+        "pass": true,
+        "method": "vitest src/utils/contract.test.ts (and UI tests in App.test.tsx for T1–T7)"
+      },
+      "low_code": {
+        "observed": {
+          "available": false,
+          "reasonCode": "duration_too_long",
+          "message": "Duration must be at most 120 minutes (requested 121)."
+        },
+        "pass": true,
+        "method": "HTTP POST /api/check (same rule engine as the Dashboard button); T1/T2/T3/T5 also confirmed on the Dashboard UI"
+      }
+    },
+    {
+      "id": "T6",
+      "expected": {
+        "available": false,
+        "reasonCode": "past_start",
+        "message": "Start time 08:30 must be after the current time 09:00."
+      },
+      "code_based": {
+        "observed": {
+          "available": false,
+          "reasonCode": "past_start",
+          "message": "Start time 08:30 must be after the current time 09:00."
+        },
+        "pass": true,
+        "method": "vitest src/utils/contract.test.ts (and UI tests in App.test.tsx for T1–T7)"
+      },
+      "low_code": {
+        "observed": {
+          "available": false,
+          "reasonCode": "past_start",
+          "message": "Start time 08:30 must be after the current time 09:00."
+        },
+        "pass": true,
+        "method": "HTTP POST /api/check (same rule engine as the Dashboard button); T1/T2/T3/T5 also confirmed on the Dashboard UI"
+      }
+    },
+    {
+      "id": "T7",
+      "expected": {
+        "available": true,
+        "reasonCode": "available",
+        "message": "Room 101 is available from 11:00 to 12:00 (60 min)."
+      },
+      "code_based": {
+        "observed": {
+          "available": true,
+          "reasonCode": "available",
+          "message": "Room 101 is available from 11:00 to 12:00 (60 min)."
+        },
+        "pass": true,
+        "method": "vitest src/utils/contract.test.ts (and UI tests in App.test.tsx for T1–T7)"
+      },
+      "low_code": {
+        "observed": {
+          "available": true,
+          "reasonCode": "available",
+          "message": "Room 101 is available from 11:00 to 12:00 (60 min)."
+        },
+        "pass": true,
+        "method": "HTTP POST /api/check (same rule engine as the Dashboard button); T1/T2/T3/T5 also confirmed on the Dashboard UI"
+      }
+    },
+    {
+      "id": "T8",
+      "expected": {
+        "available": null,
+        "reasonCode": null,
+        "message": "existingBookings strictly unchanged: [{ start: 600, end: 660 }]",
+        "bookingsUnchanged": true
+      },
+      "code_based": {
+        "observed": {
+          "available": null,
+          "reasonCode": null,
+          "message": "existingBookings strictly unchanged: [{ start: 600, end: 660 }]",
+          "bookingsUnchanged": true
+        },
+        "pass": true,
+        "method": "vitest src/utils/contract.test.ts (and UI tests in App.test.tsx for T1–T7)"
+      },
+      "low_code": {
+        "observed": {
+          "available": null,
+          "reasonCode": null,
+          "message": "existingBookings strictly unchanged: [{ start: 600, end: 660 }]",
+          "bookingsUnchanged": true
+        },
+        "pass": true,
+        "method": "HTTP POST /api/check (same rule engine as the Dashboard button); T1/T2/T3/T5 also confirmed on the Dashboard UI"
+      }
+    }
+  ]
+}
